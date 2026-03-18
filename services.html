@@ -29,23 +29,49 @@
             letter-spacing: 2px;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            margin: 0;
-            padding: 0;
+        /* DROPDOWN */
+        .dropdown {
+            position: relative;
         }
 
-        nav ul li a {
-            text-decoration: none;
+        .dropbtn {
+            background: black;
             color: white;
-            font-size: 15px;
-            transition: 0.3s;
+            border: 1px solid #333;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
-        nav ul li a:hover {
-            color: red;
+        .dropbtn:hover {
+            border-color: red;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #1a1a1a;
+            min-width: 180px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: red;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         /* HEADER */
@@ -58,7 +84,6 @@
         header h2 {
             font-size: 42px;
             margin-bottom: 10px;
-            letter-spacing: 1px;
         }
 
         header p {
@@ -88,7 +113,6 @@
 
         .service-box h3 {
             color: red;
-            margin-bottom: 10px;
         }
 
         .price {
@@ -113,12 +137,16 @@
     <!-- NAVBAR -->
     <nav>
         <h1>YOUR LOGO</h1>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="booking.html">Booking</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+
+        <div class="dropdown">
+            <button class="dropbtn">Menu ☰</button>
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="booking.html">Booking</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
     </nav>
 
     <!-- HEADER -->
@@ -127,7 +155,7 @@
         <p>Professional detailing to keep your vehicle looking brand new</p>
     </header>
 
-    <!-- SERVICES SECTION -->
+    <!-- SERVICES -->
     <section class="services">
 
         <div class="service-box">
