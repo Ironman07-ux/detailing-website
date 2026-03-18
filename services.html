@@ -1,214 +1,1175 @@
-<!DOCTYPE html>
+
+html_code = '''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - Car Detailing</title>
-
+    <title>Auto Detail Pro | Premium Car Detailing</title>
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0d0d0d;
-            color: white;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* NAVBAR */
+        :root {
+            --black: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --gray: #2a2a2a;
+            --light-gray: #888;
+            --white: #ffffff;
+            --red: #e63946;
+            --red-dark: #c1121f;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
         nav {
-            background: black;
-            padding: 15px 30px;
+            background-color: var(--dark-gray);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--red);
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        nav h1 {
-            color: red;
-            margin: 0;
+        /* Logo Placeholder */
+        .logo-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
             letter-spacing: 2px;
         }
 
-        /* DROPDOWN */
-        .dropdown {
+        .logo-text span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--red);
+        }
+
+        .admin-login-btn {
+            background-color: var(--red);
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .admin-login-btn:hover {
+            background-color: var(--red-dark);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: linear-gradient(135deg, rgba(10,10,10,0.9), rgba(26,26,26,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%230a0a0a" width="1200" height="600"/><path fill="%231a1a1a" d="M0 300L50 325L100 300L150 275L200 300L250 325L300 300L350 275L400 300L450 325L500 300L550 275L600 300L650 325L700 300L750 275L800 300L850 325L900 300L950 275L1000 300L1050 325L1100 300L1150 275L1200 300V600H0V300Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230,57,70,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--red);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--red);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(230,57,70,0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            background-color: var(--dark-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-title span {
+            color: var(--red);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: var(--gray);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red), var(--red-dark));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--red);
+            box-shadow: 0 10px 40px rgba(230,57,70,0.1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .service-card p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-price {
+            font-size: 1.3rem;
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        /* Booking Section */
+        .booking {
+            padding: 6rem 5%;
+            background-color: var(--black);
+        }
+
+        .booking-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .booking-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .booking-info p {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+        }
+
+        .availability-calendar {
+            background-color: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            text-align: center;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .calendar-day:hover {
+            background-color: var(--red);
+        }
+
+        .calendar-day.disabled {
+            background-color: #1a1a1a;
+            color: #555;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.selected {
+            background-color: var(--red);
+            font-weight: bold;
+        }
+
+        .booking-form {
+            background-color: var(--dark-gray);
+            padding: 2.5rem;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--gray);
+            border: 1px solid #444;
+            color: var(--white);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--red);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            background-color: var(--dark-gray);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--light-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--red);
+        }
+
+        .footer-text {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter {
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .newsletter h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            background-color: var(--gray);
+            border: 1px solid #444;
+            color: var(--white);
+            border-radius: 4px;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background-color: var(--red);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--red-dark);
+        }
+
+        /* Admin Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--dark-gray);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid var(--red);
+            max-width: 400px;
+            width: 90%;
             position: relative;
         }
 
-        .dropbtn {
-            background: black;
-            color: white;
-            border: 1px solid #333;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .dropbtn:hover {
-            border-color: red;
-        }
-
-        .dropdown-content {
-            display: none;
+        .close-modal {
             position: absolute;
-            right: 0;
-            background-color: #1a1a1a;
-            min-width: 180px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            overflow: hidden;
-            z-index: 1000;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-gray);
+            transition: color 0.3s;
         }
 
-        .dropdown-content a {
-            color: white;
-            padding: 12px;
-            text-decoration: none;
-            display: block;
+        .close-modal:hover {
+            color: var(--red);
         }
 
-        .dropdown-content a:hover {
-            background-color: red;
-        }
-
-        /* SHOW CLASS */
-        .show {
-            display: block;
-        }
-
-        /* HEADER */
-        header {
+        .modal h2 {
+            margin-bottom: 1.5rem;
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(black, #1a1a1a);
         }
 
-        header h2 {
-            font-size: 42px;
-            margin-bottom: 10px;
+        .modal h2 span {
+            color: var(--red);
         }
 
-        header p {
-            color: #aaa;
+        /* Admin Dashboard (Hidden by default) */
+        .admin-dashboard {
+            display: none;
+            padding: 6rem 5%;
+            background-color: var(--black);
+            min-height: 100vh;
         }
 
-        /* SERVICES */
-        .services {
+        .admin-dashboard.active {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .admin-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-            padding: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .service-box {
-            background: #1a1a1a;
-            padding: 25px;
-            border-radius: 12px;
+        .admin-card {
+            background-color: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 8px;
             border: 1px solid #333;
-            transition: 0.3s;
         }
 
-        .service-box:hover {
-            border-color: red;
-            transform: translateY(-5px);
+        .admin-card h3 {
+            color: var(--red);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .service-box h3 {
-            color: red;
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
         }
 
-        .price {
-            color: #aaa;
-            margin-top: 10px;
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
         }
 
-        /* FOOTER */
-        footer {
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        .admin-table th {
+            color: var(--red);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background-color: #f59e0b;
+            color: var(--black);
+        }
+
+        .status-confirmed {
+            background-color: #10b981;
+            color: var(--black);
+        }
+
+        .logout-btn {
+            background-color: var(--gray);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: #10b981;
+            color: var(--black);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-weight: 600;
             text-align: center;
-            padding: 25px;
-            background: black;
-            margin-top: 40px;
-            color: #777;
-            border-top: 1px solid #222;
+        }
+
+        .success-message.active {
+            display: block;
         }
     </style>
 </head>
-
 <body>
-
-    <!-- NAVBAR -->
+    <!-- Navigation -->
     <nav>
-        <h1>YOUR LOGO</h1>
-
-        <div class="dropdown">
-            <button class="dropbtn" onclick="toggleMenu()">Menu ☰</button>
-
-            <div id="dropdownMenu" class="dropdown-content">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <a href="booking.html">Booking</a>
-                <a href="contact.html">Contact</a>
+        <div class="nav-container">
+            <!-- Logo Placeholder - Replace with your actual logo -->
+            <div class="logo-placeholder" onclick="window.scrollTo(0,0)">
+                <div class="logo-box">AD</div>
+                <div class="logo-text">AUTO<span>DETAIL</span></div>
             </div>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Booking</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="admin-login-btn" onclick="openAdminModal()">Admin Login</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
-    <!-- HEADER -->
-    <header>
-        <h2>Our Services</h2>
-        <p>Professional detailing to keep your vehicle looking brand new</p>
-    </header>
-
-    <!-- SERVICES -->
-    <section class="services">
-
-        <div class="service-box">
-            <h3>Exterior Wash</h3>
-            <p>Full exterior hand wash with premium products.</p>
-            <p class="price">$50+</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Premium Car <span>Detailing</span></h1>
+            <p>Professional-grade detailing services that bring your vehicle back to showroom condition. We treat every car like it's our own.</p>
+            <div class="cta-buttons">
+                <a href="#booking" class="btn btn-primary">Book Now</a>
+                <a href="#services" class="btn btn-secondary">Our Services</a>
+            </div>
         </div>
-
-        <div class="service-box">
-            <h3>Interior Cleaning</h3>
-            <p>Deep interior vacuum, wipe-down, and detailing.</p>
-            <p class="price">$80+</p>
-        </div>
-
-        <div class="service-box">
-            <h3>Full Detail Package</h3>
-            <p>Complete inside & outside detail for your vehicle.</p>
-            <p class="price">$150+</p>
-        </div>
-
-        <div class="service-box">
-            <h3>Wax & Polish</h3>
-            <p>Protective wax coating and shine restoration.</p>
-            <p class="price">$120+</p>
-        </div>
-
-        <div class="service-box">
-            <h3>Engine Bay Cleaning</h3>
-            <p>Safe cleaning and detailing of engine components.</p>
-            <p class="price">$60+</p>
-        </div>
-
-        <div class="service-box">
-            <h3>Custom Service</h3>
-            <p>Need something specific? Contact us for custom work.</p>
-            <p class="price">Custom Quote</p>
-        </div>
-
     </section>
 
-    <!-- FOOTER -->
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Our <span>Services</span></h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Exterior Wash & Wax</h3>
+                <p>Complete hand wash, clay bar treatment, and premium wax application for lasting protection and shine.</p>
+                <div class="service-price">Starting at $79</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Interior Deep Clean</h3>
+                <p>Full interior detailing including steam cleaning, leather conditioning, and odor elimination.</p>
+                <div class="service-price">Starting at $129</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Paint Correction</h3>
+                <p>Multi-stage polishing to remove swirl marks, scratches, and restore paint clarity and depth.</p>
+                <div class="service-price">Starting at $299</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3>Ceramic Coating</h3>
+                <p>Professional-grade ceramic coating application providing 2-5 years of paint protection.</p>
+                <div class="service-price">Starting at $599</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">💺</div>
+                <h3>Leather Restoration</h3>
+                <p>Deep cleaning, conditioning, and color restoration for leather seats and interior trim.</p>
+                <div class="service-price">Starting at $199</div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">🏎️</div>
+                <h3>Full Detail Package</h3>
+                <p>Our comprehensive service combining exterior, interior, and engine bay detailing.</p>
+                <div class="service-price">Starting at $349</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <h2 class="section-title">Book <span>Appointment</span></h2>
+        <div class="booking-container">
+            <div class="booking-info">
+                <h2>Check Availability</h2>
+                <p>Select a date from the calendar to see our available time slots. We recommend booking at least 48 hours in advance for premium services.</p>
+                
+                <div class="availability-calendar">
+                    <div class="calendar-header">
+                        <button onclick="changeMonth(-1)">←</button>
+                        <span id="currentMonth">March 2026</span>
+                        <button onclick="changeMonth(1)">→</button>
+                    </div>
+                    <div class="calendar-grid" id="calendar">
+                        <!-- Calendar generated by JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="booking-form">
+                <div class="success-message" id="bookingSuccess">
+                    Booking request submitted! We'll contact you shortly to confirm.
+                </div>
+                <form id="bookingForm" onsubmit="handleBooking(event)">
+                    <div class="form-group">
+                        <label>Selected Date</label>
+                        <input type="text" id="selectedDate" placeholder="Select a date from calendar" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" required placeholder="John Doe">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" required placeholder="(555) 123-4567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" required placeholder="john@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Service Type</label>
+                        <select required>
+                            <option value="">Select a service</option>
+                            <option value="exterior">Exterior Wash & Wax</option>
+                            <option value="interior">Interior Deep Clean</option>
+                            <option value="paint">Paint Correction</option>
+                            <option value="ceramic">Ceramic Coating</option>
+                            <option value="leather">Leather Restoration</option>
+                            <option value="full">Full Detail Package</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Vehicle Info (Year, Make, Model)</label>
+                        <input type="text" required placeholder="2020 Toyota Camry">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Additional Notes</label>
+                        <textarea rows="3" placeholder="Any specific concerns or requests..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Request Booking</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact <span>Us</span></h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📍</div>
+                <h3>Location</h3>
+                <p>[Your Business Address]<br>City, State ZIP</p>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>Phone</h3>
+                <p>[Your Phone Number]<br>Mon-Sat: 8AM - 6PM</p>
+            </div>
+            
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h3>Email</h3>
+                <p>[your@email.com]<br>24/7 Online Support</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2026 Your Business Name | All Rights Reserved</p>
+        <div class="footer-content">
+            <div class="footer-logo">AUTO<span>DETAIL</span></div>
+            <p class="footer-text">Premium car detailing services. Professional results guaranteed.</p>
+            
+            <div class="newsletter">
+                <h4>Subscribe for Updates & Offers</h4>
+                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            
+            <p style="color: #555; font-size: 0.9rem;">© 2026 Auto Detail Pro. All rights reserved.</p>
+        </div>
     </footer>
 
-    <!-- SCRIPT (THIS MAKES DROPDOWN WORK) -->
-    <script>
-        function toggleMenu() {
-            document.getElementById("dropdownMenu").classList.toggle("show");
-        }
-    </script>
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAdminModal()">×</span>
+            <h2>Admin <span>Login</span></h2>
+            <form onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label>Username / Access Code</label>
+                    <input type="text" id="adminUser" required placeholder="Enter admin code">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPass" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
 
+    <!-- Admin Dashboard (Hidden) -->
+    <div id="adminDashboard" class="admin-dashboard">
+        <div class="admin-header">
+            <h2 style="color: var(--red);">Management <span style="color: white;">Dashboard</span></h2>
+            <button class="logout-btn" onclick="adminLogout()">Logout</button>
+        </div>
+        
+        <div class="admin-grid">
+            <div class="admin-card">
+                <h3>Total Bookings</h3>
+                <div class="stat-number" id="totalBookings">24</div>
+                <p style="color: var(--light-gray); margin-top: 0.5rem;">This month</p>
+            </div>
+            
+            <div class="admin-card">
+                <h3>Pending</h3>
+                <div class="stat-number" id="pendingBookings">8</div>
+                <p style="color: var(--light-gray); margin-top: 0.5rem;">Awaiting confirmation</p>
+            </div>
+            
+            <div class="admin-card">
+                <h3>Revenue</h3>
+                <div class="stat-number" id="revenue">$4,250</div>
+                <p style="color: var(--light-gray); margin-top: 0.5rem;">This month</p>
+            </div>
+        </div>
+        
+        <div class="admin-card" style="margin-top: 2rem;">
+            <h3>Recent Bookings</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Client</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingsTable">
+                    <tr>
+                        <td>Mar 18, 2026</td>
+                        <td>John Smith</td>
+                        <td>Full Detail Package</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td><button style="background: var(--red); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer;">Confirm</button></td>
+                    </tr>
+                    <tr>
+                        <td>Mar 19, 2026</td>
+                        <td>Sarah Johnson</td>
+                        <td>Interior Deep Clean</td>
+                        <td><span class="status-badge status-confirmed">Confirmed</span></td>
+                        <td><button style="background: var(--gray); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer;">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>Mar 20, 2026</td>
+                        <td>Mike Davis</td>
+                        <td>Ceramic Coating</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td><button style="background: var(--red); color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer;">Confirm</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="admin-card" style="margin-top: 2rem;">
+            <h3>Email Subscribers</h3>
+            <p style="color: var(--light-gray); margin-bottom: 1rem;">Total subscribers: <strong style="color: white;">156</strong></p>
+            <button class="btn btn-primary" onclick="alert('Email campaign feature - integrate with SendGrid/Mailchimp')">Send Newsletter</button>
+        </div>
+    </div>
+
+    <script>
+        // Calendar Logic
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            calendar.innerHTML = '';
+            
+            // Day headers
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            days.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.textContent = day;
+                dayHeader.style.fontWeight = 'bold';
+                dayHeader.style.color = 'var(--red)';
+                calendar.appendChild(dayHeader);
+            });
+            
+            // Empty cells
+            for (let i = 0; i < firstDay; i++) {
+                calendar.appendChild(document.createElement('div'));
+            }
+            
+            // Days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                // Disable past dates
+                const cellDate = new Date(year, month, day);
+                const today = new Date();
+                today.setHours(0,0,0,0);
+                
+                if (cellDate < today) {
+                    dayCell.classList.add('disabled');
+                } else {
+                    dayCell.onclick = () => selectDate(dateStr, dayCell);
+                }
+                
+                if (selectedDate === dateStr) {
+                    dayCell.classList.add('selected');
+                }
+                
+                calendar.appendChild(dayCell);
+            }
+        }
+
+        function changeMonth(delta) {
+            currentDate.setMonth(currentDate.getMonth() + delta);
+            generateCalendar();
+        }
+
+        function selectDate(dateStr, element) {
+            selectedDate = dateStr;
+            document.getElementById('selectedDate').value = dateStr;
+            
+            // Remove previous selection
+            document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        // Form Handlers
+        function handleBooking(e) {
+            e.preventDefault();
+            if (!selectedDate) {
+                alert('Please select a date from the calendar first');
+                return;
+            }
+            
+            document.getElementById('bookingSuccess').classList.add('active');
+            e.target.reset();
+            selectedDate = null;
+            document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
+            document.getElementById('selectedDate').value = '';
+            
+            setTimeout(() => {
+                document.getElementById('bookingSuccess').classList.remove('active');
+            }, 5000);
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing! You will receive updates and special offers via email.');
+            e.target.reset();
+        }
+
+        // Admin Functions
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.add('active');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.remove('active');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            
+            // Simple demo login - REPLACE WITH SECURE AUTHENTICATION
+            if (user === 'admin' && pass === 'password') {
+                closeAdminModal();
+                document.getElementById('adminDashboard').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                e.target.reset();
+            } else {
+                alert('Invalid credentials. Try admin/password for demo.');
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('adminDashboard').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('adminModal').addEventListener('click', function(e) {
+            if (e.target === this) closeAdminModal();
+        });
+
+        // Initialize
+        generateCalendar();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
 </body>
-</html>
+</html>'''
+
+# Save the file
+with open('/mnt/kimi/output/car_detailing_website.html', 'w') as f:
+    f.write(html_code)
+
+print("Website created successfully!")
+print("\nFeatures included:")
+print("✅ Sleek black/red/white/gray color scheme")
+print("✅ Logo placeholder area (replace 'AD' and 'AUTO DETAIL' text)")
+print("✅ Services page with 6 service cards and pricing")
+print("✅ Interactive booking calendar and form")
+print("✅ Contact section with placeholders for your info")
+print("✅ Admin login modal (demo: admin/password)")
+print("✅ Management dashboard with booking data")
+print("✅ Email newsletter signup")
+print("✅ Fully responsive design")
+print("\nFile saved to: /mnt/kimi/output/car_detailing_website.html")
